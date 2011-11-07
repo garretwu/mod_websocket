@@ -138,7 +138,7 @@ mod_websocket_frame_recv(handler_ctx *hctx) {
             }
         } else if (hctx->frame.state ==
                    MOD_WEBSOCKET_FRAME_STATE_READ_PAYLOAD) {
-            if (-1 == frame->ptr[i]) { // XXX: equal to tail flag(0xff)
+            if (0xff == frame->ptr[i]) { // XXX: equal to tail flag(0xff)
                 hctx->frame.state = MOD_WEBSOCKET_FRAME_STATE_INIT;
                 if (mod_websocket_conv_isUTF8(payload->ptr,
                                               payload->used) !=
